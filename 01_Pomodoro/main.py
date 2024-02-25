@@ -1,6 +1,4 @@
-
-# 100 Dias de Python - Dia 1 - Pomodoro
-# Computação Científica Para Engenharia
+# Pomodoro no Tkinter
 # Programa Desenvolvido por Thiago Barros
 # Rev 00
 
