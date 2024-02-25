@@ -1,0 +1,3 @@
+Esse projeto tem como finalidade, determinar o impacto da temperatura externa e do uso do processador na temperatura do mesmo.
+
+Serão avaliadas os diferentes tipos de planos de energia e seus impactos no desempenho do computador
