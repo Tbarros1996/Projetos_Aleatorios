@@ -1,0 +1,105 @@
+---
+title: "eixo"
+author: "Thiago-Barros"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+
+Relatório Técnico de Avaliação de Controle Estatístico de Processo
+
+Responsável: Thiago Barros
+
+Empresa: TB-Usinagem
+
+Data de Avaliação: 16/03/2024
+
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+
+Descrição Técnica da Avaliação:
+
+Determinar se existem falhas no processo de fabricação do eixo ou na aferição do sistema de medição.
+
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+
+Avaliação de Fabricação de Eixo - Aço 1045 - Dados de Coleta de Sensor
+
+Dados de Projeto:
+
+##### Diametro Nominal: 100,00 mm
+
+##### Diametro Tolerânciamento: 0,5 mm
+
+```{r}
+
+library(qcc)
+library(tidyverse)
+library(DescTools)
+```
+
+```{r}
+
+dados <- read.csv2("diametro_eixo.csv")
+Desc(dados,plotit = FALSE)
+```
+
+```{r}
+head(dados,5)
+```
+
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+
+Avaliação Preliminar - Base de Dados
+
+Registros Ausentes: 0
+
+Total de Amostras: 300
+
+Registros Zerados: 0
+
+Média da Amostragem: 99,85 mm
+
+Mediana da Amostragem: 99,57 mm
+
+Intervalo de Confiaça - 98,74 - 100,97 mm
+
+Menor Valor: 74,81 mm
+
+Maior Valor: 126.86 mm
+
+Valores Normalmente Distribuidos P-Value \> 5%
+
+```{r}
+shapiro.test(dados$Column_1)
+```
+
+\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\-\--
+
+```{r}
+hist(dados$Column_1,main = 'Histograma',xlab = "Diâmetro",ylab = "Frequência")
+
+```
+
+Avaliação de Processo:
+
+```{r}
+
+diametro <- (dados$Column_1)
+
+```
+
+```{r}
+
+#Carta de Controle para Valores Individuais
+
+qcc(diametro,type = "xbar.one", main="Carta de Controle",plot = TRUE)
+```
+
+Avaliação:
+
+Os limites inferiores e superiores da amostragem indicam um processo que se encontra fora do toleranciamento de especificação. Pode-se dizer que será necessário avaliar o processo para reajustar e agrupar os valores mais próximos da média.
