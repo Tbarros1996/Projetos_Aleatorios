@@ -1,0 +1,26 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(DescTools)
+```
+
+```{r}
+df <- read.csv("housing.csv")
+```
+
+```{r}
+head(df)
+```
+
+```{r}
+Desc(df)
+```
+
+```{r}
+renda <- df$median_income
+hist(renda)
+```
