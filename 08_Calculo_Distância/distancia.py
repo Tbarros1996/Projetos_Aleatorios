@@ -1,4 +1,3 @@
-# Veneza Equipamentos
 # Calculadora de Dados de Distância entre Coordenadas.
 # Equação de Haversine
 # Obs: Coordenadas em graus devem ser convertidas para radianos
